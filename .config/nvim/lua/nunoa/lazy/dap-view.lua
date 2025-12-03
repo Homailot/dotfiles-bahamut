@@ -5,10 +5,12 @@ return {
 	opts = {
 		windows = {
 			terminal = {
+				position = "right",
 				start_hidden = false,
 			},
 		},
+		auto_toggle = true,
 	},
 	keys = {},
-	lazy = true,
+	lazy = false,
 }

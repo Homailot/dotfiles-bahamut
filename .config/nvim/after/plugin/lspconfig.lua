@@ -21,6 +21,9 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 	},
+	matching = {
+		disallow_prefix_unmatching = false,
+	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 	}, {
@@ -144,6 +147,13 @@ require("conform").setup({
 		lua = { "stylua" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
+		javascript = { "prettierd" },
+		javascriptreact = { "prettierd" },
+		typescript = { "prettierd" },
+		typescriptreact = { "prettierd" },
+		html = { "prettierd" },
+		json = { "prettierd" },
+		css = { "prettierd" },
 	},
 	format_on_save = {
 		-- These options will be passed to conform.format()
@@ -154,3 +164,9 @@ require("conform").setup({
 
 vim.lsp.enable("clangd")
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("jsonls")
+vim.lsp.enable("html")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("tailwindcss")
+vim.lsp.enable("cssls")
+vim.lsp.enable("eslint")

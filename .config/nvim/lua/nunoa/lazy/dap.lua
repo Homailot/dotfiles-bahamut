@@ -1,26 +1,45 @@
 return {
 	"mfussenegger/nvim-dap",
 	config = function()
-		vim.keymap.set("n", "<leader>d<space>", ":DapContinue<CR>")
+		vim.keymap.set("n", "<leader>dd", ":DapContinue<CR>")
 		vim.keymap.set("n", "<leader>dl", ":DapStepInto<CR>")
 		vim.keymap.set("n", "<leader>dj", ":DapStepOver<CR>")
 		vim.keymap.set("n", "<leader>dh", ":DapStepOut<CR>")
 		vim.keymap.set("n", "<leader>dz", ":ZoomWinTabToggle<CR>")
-		vim.keymap.set("n", "<leader>d-", function()
-			require("dap").restart()
+		vim.keymap.set("n", "<leader>dK", function()
+			require("dap.ui.widgets").hover()
 		end)
 		vim.keymap.set("n", "<leader>d_", function()
 			require("dap").terminate()
 		end)
 
 		local dap = require("dap")
+		dap.adapters.codelldb = {
+			type = "executable",
+			command = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/codelldb"),
+		}
+
 		dap.adapters.gdb = {
 			type = "executable",
 			command = "gdb",
 			args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
 		}
 
-		dap.configurations.c = {
+		local codelldbConfig = {
+			{
+				name = "Launch file",
+				type = "codelldb",
+				request = "launch",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				cwd = "${workspaceFolder}",
+				stopOnEntry = false,
+				console = "integratedTerminal",
+			},
+		}
+
+		local gdbConfig = {
 			{
 				name = "Launch",
 				type = "gdb",
@@ -56,25 +75,24 @@ return {
 				cwd = "${workspaceFolder}",
 			},
 		}
+
+		dap.configurations.c = codelldbConfig
 		dap.configurations.cpp = dap.configurations.c
 	end,
 	keys = {
 		{
 			"<leader>do",
 			function()
-				require("dap-view").open()
 				require("dap").continue()
 			end,
 		},
 		{
 			"<leader>d-",
 			function()
-				require("dap-view").close()
 				require("dap").terminate()
 			end,
 		},
 		{ "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>" },
-		{ "<leader>dd", "<cmd>lua require('dap').continue()<cr>" },
 	},
 	dependencies = {
 		"igorlfs/nvim-dap-view",
