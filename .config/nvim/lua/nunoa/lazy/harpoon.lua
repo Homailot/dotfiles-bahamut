@@ -64,7 +64,7 @@ return {
 					sorter = conf.generic_sorter({}),
 					attach_mappings = function(prompt_buffer_number, map)
 						-- The keymap you need
-						map("i", "<c-d>", function()
+						map({ "i", "n" }, "<c-d>", function()
 							local state = require("telescope.actions.state")
 							local selected_entry = state.get_selected_entry()
 							local current_picker = state.get_current_picker(prompt_buffer_number)
