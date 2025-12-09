@@ -90,6 +90,32 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+vim.lsp.config("tailwindcss", {
+	settings = {
+		tailwindCSS = {
+			includeLanguages = {
+				eelixir = "html-eex",
+				elixir = "phoenix-heex",
+				eruby = "erb",
+				heex = "phoenix-heex",
+				htmlangular = "html",
+				templ = "html",
+				ts = "typescript",
+				css = "css",
+			},
+			experimental = {
+				classRegex = {
+					"class:\\s'(.*?)'",
+					'class=\\s"(.*?)"',
+					"\\[class\\.(.*?)]",
+					"\\[class]':\\s.*?'(.*?)'",
+					"\\[class]':\\s.+'(.*?)'",
+				},
+			},
+		},
+	},
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("my.lsp", {}),
 	callback = function(args)
@@ -152,6 +178,7 @@ require("conform").setup({
 		typescript = { "prettierd" },
 		typescriptreact = { "prettierd" },
 		html = { "prettierd" },
+		htmlangular = { "prettierd" },
 		json = { "prettierd" },
 		css = { "prettierd" },
 	},
