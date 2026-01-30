@@ -1,0 +1,39 @@
+{
+    "apps": [
+        {
+            "auto-detach": false,
+            "cmd": "sh -c \"${HOME}/.config/sunshine/scripts/shutdown.sh\"&",
+            "elevated": false,
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 2,
+            "image-path": ".config/sunshine/power.png",
+            "name": "Shutdown",
+            "output": "test.txt",
+            "wait-all": false
+        },
+        {
+            "auto-detach": true,
+            "detached": [
+                "setsid steam steam://open/bigpicture"
+            ],
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "steam.png",
+            "name": "Steam Big Picture Pixel 10 Pro",
+            "prep-cmd": [
+                {
+                    "do": "",
+                    "undo": "setsid steam steam://close/bigpicture"
+                },
+                {
+                    "do": "sh -c \"${HOME}/.config/sunshine/scripts/configure_virtual_monitor.sh\"",
+                    "undo": "sh -c \"${HOME}/.config/sunshine/scripts/disable_virtual_monitor.sh\""
+                }
+            ],
+            "wait-all": true
+        }
+    ],
+    "env": {
+        "PATH": "$(PATH):$(HOME)/.local/bin"
+    }
+}
