@@ -1,0 +1,8 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("wl-paste --type text --watch cliphist store")
+	hl.exec_cmd("wl-paste --type image --watch cliphist store")
+	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("wlsunset -l 41.0 -L -8.6 -t 5000")
+	hl.exec_cmd("swaync")
+	hl.exec_cmd("fcitx5")
+end)

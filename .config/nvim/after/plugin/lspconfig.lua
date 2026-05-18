@@ -81,6 +81,7 @@ vim.lsp.config("lua_ls", {
 				checkThirdParty = false,
 				library = {
 					vim.env.VIMRUNTIME,
+					"/usr/share/hypr/stubs",
 				},
 			},
 		})
