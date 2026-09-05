@@ -8,11 +8,11 @@ end='", position = "auto", scale = 1, bitdepth = 10, cm = "hdr", disabled = fals
 
 hyprctl eval "$start$mode$end"
 
-hyprctl eval 'hl.monitor({output = "DP-1", disabled = true })'
-hyprctl eval 'hl.monitor({output = "DP-2", disabled = true })'
-
 hyprctl dispatch 'hl.dsp.focus({ monitor = "headless-3" })'
 hyprctl dispatch 'hl.dsp.focus({ workspace = 9, on_current_monitor = true })'
+
+hyprctl eval 'hl.monitor({output = "DP-1", disabled = true })'
+hyprctl eval 'hl.monitor({output = "DP-2", disabled = true })'
 
 systemctl --user stop waybar
 systemctl --user stop hypridle.service

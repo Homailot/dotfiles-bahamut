@@ -64,6 +64,13 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	-- fix issues musescore tooltips
+	name = "window_rule_musescore",
+	match = { class = "MuseScore4", float = true },
+	no_initial_focus = true,
+})
+
+hl.window_rule({
 	name = "move-hyprland-run",
 	match = { class = "hyprland-run" },
 
